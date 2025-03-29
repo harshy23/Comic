@@ -30,8 +30,7 @@ SECRET_KEY = 'django-insecure-91tvuns-p4cj-%2&u_#ei19vbtf0shca5su+mlvq-j@0=5=lpd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["https://yumcomix-5tnq.onrender.com", "localhost", "127.0.0.1"]  
 
 # Application definition
 
