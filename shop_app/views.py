@@ -11,6 +11,8 @@ from django.conf import settings
 import requests
 import uuid
 import paypalrestsdk
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 # BASE_URL = "http://localhost:5173"
@@ -97,8 +99,30 @@ def delte_item(request):
 
     return Response(status = status.HTTP_204_NO_CONTENT)
 
-    
+@api_view(["POST"])
+def new_user(request):
+    User = get_user_model()
+    if request.method == "POST":
+        name = request.data.get("name")
+        email = request.data.get("email")
+        password = request.data.get("password")
+        # user = request.user
 
+        if User.objects.filter(username =name).exists():
+            return Response({"error":"user Name already used"},status=400)
+        elif User.objects.filter(email = email).exists():
+            return Response({"error":"Email already used"},status=400)
+        else:
+            user=User.objects.create_user(username =name ,email =email)
+            user.set_password(password)  # Hash the password
+            user.save()
+            return Response({"message":"account created now login","url":f"{BASE_URL}/login"},status=201)
+    else:
+        return Response({"error": "Invalid request method"}, status=405)
+
+
+
+        
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_username(request):

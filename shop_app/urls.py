@@ -12,6 +12,7 @@ urlpatterns = [
      path("delte_item/",views.delte_item,name="delte_item"),
      path("get_username",views.get_username,name="get_username"),
      path("get_userinfo",views.get_userinfo,name="get_userinfo"),
+     path("new_user/",views.new_user,name="new_user"),
      path("initiate_payment/",views.initiate_payment,name="initiate_payment"),
      path("payment_callback/" , views.payment_callback , name="payment_callback"),
      path("initiate_paypal_payment/",views.initiate_paypal_payment,name="initiate_paypal_payment"),
